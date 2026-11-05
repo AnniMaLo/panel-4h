@@ -238,7 +238,7 @@ footer { font-size: 12px; color: var(--dim); text-align: center; line-height: 1.
         <div class="orb" id="orb" aria-hidden="true"></div>
         <div style="min-width:0">
           <h1><span>Pochas</span> Bot</h1>
-          <div class="sub">Dos motores de 4 h · tendencia 🧭 y compresión 💥 · orden límite · stop en Binance</div>
+          <div class="sub">Tendencia 4 h 🧭 · orden límite · stop en Binance · compresión 💥 solo en papel</div>
           <div class="status"><span class="pulse" id="pulse"></span><span id="st">—</span><span class="tag" id="ver">v—</span></div>
         </div>
       </div>
@@ -378,15 +378,17 @@ footer { font-size: 12px; color: var(--dim); text-align: center; line-height: 1.
       var x = m[k] || {}, pa = x.papel || {};
       var regla = k === "T4H" ? "Cruce EMA 20/50 a favor de la EMA 200 · stop 2 ATR · móvil 3 ATR · 20 días"
                               : "Bollinger dentro de Keltner 6+ velas y ruptura · stop 1,5 ATR · móvil 3 ATR · 10 días";
-      return '<div class="mod motor ' + k.toLowerCase() + '"><h2>' + ICON[k] + " " + NOMBRE[k] +
-        '<span class="r">' + slots(x.long || 0, x.short || 0, x.tope || 8) + "</span></h2>" +
+      var off = x.activo === false;
+      return '<div class="mod motor ' + k.toLowerCase() + '"' + (off ? ' style="opacity:.6"' : "") + '><h2>' + ICON[k] + " " + NOMBRE[k] +
+        '<span class="r">' + (off ? '<span class="muted" style="font-size:12px">apagado en real · sigue en papel</span>'
+                                  : slots(x.long || 0, x.short || 0, x.tope || 8)) + "</span></h2>" +
         '<p class="rule">' + regla + "</p>" +
         '<dl class="kv"><dt>Trades cerrados</dt><dd>' + (x.trades || 0) + "</dd>" +
         "<dt>Resultado</dt><dd class=\"" + cls(x.res_pct) + "\">" + sig(x.res_pct) + "%</dd>" +
         "<dt>Promedio por trade</dt><dd class=\"" + cls(x.prom_pct) + "\">" + (x.prom_pct == null ? "—" : sig(x.prom_pct) + "%") + "</dd>" +
         "<dt>Ganados</dt><dd>" + (x.ganados == null ? "—" : x.ganados + "%") + "</dd>" +
         '<dt>Papel (simulado)</dt><dd class="muted">' + (pa.trades || 0) + " · " + (pa.prom_pct == null ? "—" : sig(pa.prom_pct) + "% por trade") + "</dd>" +
-        '<dt>Backtest 3 años</dt><dd class="muted">' + sig(x.backtest_pct) + "% por trade</dd></dl></div>";
+        '<dt>Backtest 2023-26</dt><dd class="muted">' + sig(x.backtest_pct) + "% por trade</dd></dl></div>";
     }).join("");
 
     var pos = d.posiciones || [];
