@@ -419,8 +419,8 @@ footer { font-size: 12px; color: var(--dim); text-align: center; line-height: 1.
 
   // v5.0: lo que se está probando (sombras, papeles, piezas en vigilancia) · sin USD
   var ABIERTOS = {};
-  var EXI = { midiendo: "🔵", aprobado: "✅", descartado: "⛔", apagado: "⚪", informativo: "ℹ️", alerta: "🔴" };
-  var EXG = [["real", "En real"], ["vigilancia", "En real con gatillo"], ["sombra", "En sombra (no operan)"], ["papel", "En papel (simulación)"]];
+  var EXI = { midiendo: "🔵", aprobado: "✅", descartado: "⛔", apagado: "⚪", informativo: "ℹ️", alerta: "🔴", vencido: "⌛" };
+  var EXG = [["real", "En real"], ["vigilancia", "En real con gatillo"], ["sombra", "En sombra (no operan)"], ["papel", "En papel (simulación)"], ["regla", "Reglas"]];
   function experimentos(d) {
     var it = d.experimentos || [];
     if (!it.length) return "";
